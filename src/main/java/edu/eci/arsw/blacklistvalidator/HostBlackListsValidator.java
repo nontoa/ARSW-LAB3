@@ -16,7 +16,8 @@ import java.util.logging.Logger;
  * @author hcadavid
  */
 public class HostBlackListsValidator {
-
+	static int A;
+	static int B;
     private static final int BLACK_LIST_ALARM_COUNT=5;
     
     /**
@@ -29,6 +30,12 @@ public class HostBlackListsValidator {
      * @param ipaddress suspicious host's IP address.
      * @return  Blacklists numbers where the given host's IP address was found.
      */
+    public HostBlackListsValidator(int A,int B) {
+		this.A=A;
+		this.B=B;
+		this.checkHost("200.24.34.55");
+	}
+    
     public List<Integer> checkHost(String ipaddress){
         
         LinkedList<Integer> blackListOcurrences=new LinkedList<>();
@@ -39,13 +46,13 @@ public class HostBlackListsValidator {
         
         int checkedListsCount=0;
         
-        for (int i=0;i<skds.getRegisteredServersCount() && ocurrencesCount<BLACK_LIST_ALARM_COUNT;i++){
+        for (int i=0;i<skds.getRegisteredServersCount() && ocurrencesCount<=BLACK_LIST_ALARM_COUNT;i++){
             checkedListsCount++;
-            
+            //System.out.println(skds.getRegisteredServersCount());
             if (skds.isInBlackListServer(i, ipaddress)){
                 
                 blackListOcurrences.add(i);
-                
+             
                 ocurrencesCount++;
             }
         }
@@ -57,7 +64,7 @@ public class HostBlackListsValidator {
             skds.reportAsTrustworthy(ipaddress);
         }                
         
-        LOG.log(Level.INFO, "Checked Black Lists:{0} of {1}", new Object[]{checkedListsCount, skds.getRegisteredServersCount()});
+        LOG.log(Level.INFO, "Checked Black Lists:{0} of {1} and number ocurrences {2}", new Object[]{checkedListsCount, skds.getRegisteredServersCount(),ocurrencesCount});
         
         return blackListOcurrences;
     }
