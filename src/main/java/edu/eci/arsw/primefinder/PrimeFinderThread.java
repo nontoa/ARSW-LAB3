@@ -20,8 +20,7 @@ public class PrimeFinderThread extends Thread {
 	@Override
 	public void run() {
 		Scanner sc = new Scanner(System.in);
-		synchronized (primes) {
-
+		synchronized (sc) {
 			for (int i = a; i < b; i++) {
 
 				if (isPrime(i)) {
@@ -29,15 +28,14 @@ public class PrimeFinderThread extends Thread {
 					//System.out.println(i);
 				}
 				try {
-					primes.wait(1);
+					sc.wait(1);
 					System.out.println("Numero de Primos Encontrados por el "+ Thread.currentThread().toString()+primes.size());
-					primes.notifyAll();
+					sc.notifyAll();
 					sc.nextLine();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 			}
 		}
 	}

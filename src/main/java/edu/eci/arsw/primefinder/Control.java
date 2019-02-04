@@ -44,6 +44,7 @@ public class Control extends Thread {
 		synchronized (sc) {
 			System.out.println("Oprime un boton");
 			sc.nextLine();
+			
 			for (int i = 0; i < NTHREADS; i++) {
 				
 				pft[i].start();
