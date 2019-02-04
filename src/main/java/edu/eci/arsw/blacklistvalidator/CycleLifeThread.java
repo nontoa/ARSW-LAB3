@@ -17,14 +17,6 @@ public class CycleLifeThread extends Thread {
 	public static void main(String[] args) {
 		ArrayList<CycleLifeThread> ll = new ArrayList();
 		ArrayList<HostBlackListsValidator> ll2 = new ArrayList();
-		ArrayList<Integer> X = new ArrayList<Integer>();
-		ArrayList<Integer> Y = new ArrayList<Integer>();
-
-		for (int i = 0; i < M; i++) {
-			X.add(i * N / M);
-			Y.add(((i + 1) * N / M) - 1);
-			ll2.add(new HostBlackListsValidator(i * N / M, ((i + 1) * N / M) - 1));
-		}
 
 		for (int i = 0; i < M; i++) {
 			ll.add(new CycleLifeThread());
@@ -35,17 +27,15 @@ public class CycleLifeThread extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
-		}
-		for (int i = 0; i < M; i++) {
-		
 		}
 		System.out.println("Number Ocurrence " + answer);
 	}
 	
 	public void run() {
 		cnt++;
-		answer += new HostBlackListsValidator((cnt * N) / M, ((cnt + 1) * N / M) - 1).checkHost("200.24.34.55");
+		if(M%2==0)answer += new HostBlackListsValidator((cnt * N) / M, ((cnt + 1) * N / M) - 1).checkHost("200.24.34.55",N);
+		else answer += new HostBlackListsValidator((cnt * N) / M, ((cnt + 1) * N / M)).checkHost("200.24.34.55",N);
+		
 	}
 
 }

@@ -16,8 +16,8 @@ import java.util.logging.Logger;
  * @author hcadavid
  */
 public class HostBlackListsValidator {
-	static int A;
-	static int B;
+	int A;
+    int B;
     private static final int BLACK_LIST_ALARM_COUNT=1;
     
     /**
@@ -32,10 +32,10 @@ public class HostBlackListsValidator {
      */
     public HostBlackListsValidator(int A,int B) {
 		this.A=A;
-		this.B=B;
+        this.B=B;
 	}
     
-    public int checkHost(String ipaddress){
+    public int checkHost(String ipaddress,int N){
         
         LinkedList<Integer> blackListOcurrences=new LinkedList<>();
         
