@@ -14,8 +14,8 @@ import java.util.List;
 public class Main {
     
     public static void main(String a[]){
-        HostBlackListsValidator hblv=new HostBlackListsValidator(0,10000);
-        List<Integer> blackListOcurrences=hblv.checkHost("200.24.34.55");
+        HostBlackListsValidator hblv=new HostBlackListsValidator(11000,80000);
+        int blackListOcurrences=hblv.checkHost("200.24.34.55");
         System.out.println("The host was found in the following blacklists:"+blackListOcurrences);
         
     }
