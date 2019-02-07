@@ -366,7 +366,7 @@ public class HostBlackListsValidator {
 
 ### Part III - Discussion
 
-#COLOCAR CUAL ES LA MANERA MAS EFICIENTE DE HACER LAS PARTICIONES CON HILOS CON RESPECTO AL PROCESADOR DE L COMPUTADOR ADEMAS ESPECIFICAR COTAS DE CUANDO ES MEJOR
+Se podría mejorar haciendo tantos subprocesos como nucleos de procesamiento haya en el computador que se este trabajando, para esto podemos usar la API runTime. Así se aprovechara al máximo la capacidad de procesamiento y por lo tanto la estrategia sería eficiente.
 
 
 ### Part IV - Performance Evaluation
@@ -459,9 +459,7 @@ public class Control extends Thread {
 				pft[i].start();
 				
 			}
-		
-			
-			
+
 		}
 		
 
@@ -572,7 +570,7 @@ public class PrimeFinderThread extends Thread {
 
 * **Juan Nicolas Nontoa Caballero**  ARSW-LAB1 - [nontoa] (https://github.com/nontoa)
 
-Consulte también la lista de [colaboradores] (https://github.com/andresflorezp/ARSW-LAB1/graphs/contributors) que participaron en este proyecto.
+Consulte también la lista de [colaboradores] (https://github.com/nontoa/ARSW-LAB3/graphs/contributors) que participaron en este proyecto.
 
 ## licencia
 
