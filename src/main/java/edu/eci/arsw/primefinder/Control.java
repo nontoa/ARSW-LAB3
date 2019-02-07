@@ -41,21 +41,44 @@ public class Control extends Thread {
 	@Override
 	public void run() {
 		Scanner sc = new Scanner(System.in);
-		synchronized (sc) {
-			System.out.println("Oprime un boton");
-			sc.nextLine();
-			
-			for (int i = 0; i < NTHREADS; i++) {
-				
-				pft[i].start();
-				
-			}
-		
-			
-			
+		for (int i = 0; i < NTHREADS; i++) {
+			pft[i].numberThread=i+1;
+			pft[i].start();
+
 		}
 		
+		for(long finaliza = System.currentTimeMillis() + TMILISECONDS;System.currentTimeMillis() <= finaliza;) {
+			if (System.currentTimeMillis() >= finaliza && !terminate()) {
+				for (int i = 0; i < pft.length; i++) {
+					pft[i].detener();
+
+				}
+				System.out.println("Touch key");
+				sc.nextLine();
+				for (int i = 0; i < pft.length; i++) {
+					System.out.println("The thread that is running is "+ pft[i].numberThread+" number of primes is: "+pft[i].getPrimes().size());
+					pft[i].activar();
+				}
+
+				synchronized (this) {
+					this.notifyAll();
+				}
+				finaliza = System.currentTimeMillis() + TMILISECONDS;
+			} else if (System.currentTimeMillis() >= finaliza && terminate()) {
+				for (int i = 0; i < pft.length; i++)
+					System.out.println("The thread " + pft[i].numberThread + " have be found " + pft[i].getPrimes().size());
+				System.out.println("Finish");
+				System.exit(0);
+			}
+		}
 
 	}
+	private boolean terminate() {
+    	boolean acabar = true;
+    	for (int i = 0; i < pft.length && acabar; i++) {
+			if(pft[i].isAlive()) acabar = false;
+		}
+    	return acabar;
+    }
 
 }

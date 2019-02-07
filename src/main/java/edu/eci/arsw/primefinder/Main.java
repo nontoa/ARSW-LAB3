@@ -9,7 +9,6 @@ public class Main {
 		Control control = Control.newControl();
 		Scanner sc = new Scanner(System.in);
 		control.start();
-		sc.nextLine();
 
 	}
 

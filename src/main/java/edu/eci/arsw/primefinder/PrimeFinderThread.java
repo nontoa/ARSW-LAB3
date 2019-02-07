@@ -9,6 +9,8 @@ public class PrimeFinderThread extends Thread {
 	int a, b;
 
 	private List<Integer> primes;
+	public boolean espere = false;
+	public int numberThread;
 
 	public PrimeFinderThread(int a, int b) {
 		super();
@@ -20,23 +22,26 @@ public class PrimeFinderThread extends Thread {
 	@Override
 	public void run() {
 		Scanner sc = new Scanner(System.in);
-		synchronized (sc) {
-			for (int i = a; i < b; i++) {
 
-				if (isPrime(i)) {
-					primes.add(i);
-					//System.out.println(i);
-				}
-				try {
-					sc.wait(1);
-					System.out.println("Numero de Primos Encontrados por el "+ Thread.currentThread().toString()+primes.size());
-					sc.notifyAll();
-					sc.nextLine();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		for (int i = a; i < b; i++) {
+			if (espere) {
+				synchronized (this) {
+
+					try {
+						
+						this.wait();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}
 			}
+			if (isPrime(i)) {
+				primes.add(i);
+				// System.out.println(i);
+			}
+
 		}
 	}
 
@@ -52,9 +57,22 @@ public class PrimeFinderThread extends Thread {
 		}
 		return ans;
 	}
-
+	
+	
 	public List<Integer> getPrimes() {
 		return primes;
 	}
 
+	public void detener() {
+
+		espere = true;
+
+	}
+
+	public synchronized void activar() {
+
+		espere = false;
+		this.notifyAll();
+
+	}
 }
