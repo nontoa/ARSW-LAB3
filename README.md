@@ -373,7 +373,7 @@ Gráficas de visualVM con un numero determinado de hilos.
 ![Screenshot](images/T100t.PNG)
 
 
->Vemos que para calculos no tan grandes el número exagerado de hilos no puede ser la solución para optimizar el rendimiento.
+>Vemos que para calculos no tan grandes el número exagerado de hilos no puede ser la solución para optimizar el rendimiento. Como observamos anteriormente en las graficas, algunas veces es mejor que la cantidad de subprocesos no sea tan grande, puesto que esto puede generar perdida de tiempo ya que hay muchos procesos corriendo para un objetivo pequeño que se puede solucionar con menos hilos.
 
 #HACER LOS CALCULOS QUE TE PIDEN
 
