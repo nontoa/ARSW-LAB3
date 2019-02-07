@@ -350,27 +350,28 @@ Gráficas de visualVM con un numero determinado de hilos.
 
 * Para un solo hilo se comporta de la siguiente manera:
 
-![Screenshot](images/T1g.png)
+![Screenshot](images/T1g.PNG)
 
 * Y el comportamiento del hilo:
 
-![Screenshot](images/T1t.png)
+![Screenshot](images/T1t.PNG)
 
 * Para 50 hilos se comporta de la siguiente manera:
 
-![Screenshot](images/T50g.png)
+![Screenshot](images/T50g.PNG)
 
 * Y el comportamiento de los 50 hilos:
 
-![Screenshot](images/T50t.png)
+![Screenshot](images/T50t.PNG)
 
 * Para 100 hilos se comporta de la siguiente manera:
 
-![Screenshot](images/T100g.png)
+![Screenshot](images/T100g.PNG)
 
 * Y el comportamiento de los 100 hilos:
 
-![Screenshot](images/T100t.png)
+![Screenshot](images/T100t.PNG)
+
 
 >Vemos que para calculos no tan grandes el número exagerado de hilos no puede ser la solución para optimizar el rendimiento.
 
