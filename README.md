@@ -205,7 +205,7 @@ public class Main {
 
 ```
 
-#COLOCAR IMAGEN ACA CORRIENDO EL MAIN
+![Screenshot](images/Mainc.PNG)
 
 
 ### Ejecutando checkHost con parametro N
@@ -220,37 +220,67 @@ public class CycleLifeThread extends Thread {
 	public static ArrayList<CycleLifeThread> ll;
 	public static ArrayList<HostBlackListsValidator> ll2;
 	public static ArrayList<Integer> X;
-	public static ArrayList<Integer> Y;
 	public static int answer = 0;
 	public static int cnt = -1;
-	static int M = 5000;
+	public static int flag = 0;
+	static int M = 100;
 	static int N = 80000;
 
 	public static void main(String[] args) {
 		ArrayList<CycleLifeThread> ll = new ArrayList();
 		ArrayList<HostBlackListsValidator> ll2 = new ArrayList();
-
-		for (int i = 0; i < M; i++) {
+		X = new ArrayList();
+		ll.add(new CycleLifeThread());
+		ll.get(ll.size() - 1).start();
+		try {
+			ll.get(ll.size() - 1).join();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		for (int i = 0; i < M + 1; i++) {
 			ll.add(new CycleLifeThread());
 			ll.get(ll.size() - 1).start();
-			
+		}
+		for (int i = 0; i < M + 2; i++) {
 			try {
 				ll.get(ll.size() - 1).join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Number Ocurrence " + answer);
+		for (CycleLifeThread b : ll) {
+			if (b.isAlive())
+				flag = 1;
+
+		}
+
+		while (flag == 1) {
+			break;
+
+		}
+
+		if (flag == 0) {
+			int resp = 0;
+			for (int a : X)
+				resp += a;
+			if (resp >= 5) {
+				System.out.println("Resported as trustworthy");
+			} else {
+				System.out.println("Reported as NOT trustworthy");
+			}
+		}
 	}
-	
+
 	public void run() {
+
 		cnt++;
-		if(M%2==0)answer += new HostBlackListsValidator((cnt * N) / M, ((cnt + 1) * N / M) - 1).checkHost("200.24.34.55",N);
-		else answer += new HostBlackListsValidator((cnt * N) / M, ((cnt + 1) * N / M)).checkHost("200.24.34.55",N);
-		
+		// X.add(new HostBlackListsValidator((cnt * N) / M, ((cnt + 1) * N /M)).checkHost("200.24.34.55", N));
+		X.add(new HostBlackListsValidator((cnt * N) / M, ((cnt + 1) * N / M)).checkHost("212.24.24.55", N));
 	}
 
 }
+
 
 ```
 
