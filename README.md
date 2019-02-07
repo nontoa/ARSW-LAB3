@@ -285,11 +285,6 @@ public class CycleLifeThread extends Thread {
 ```
 
 ```java
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.eci.arsw.blacklistvalidator;
 
 import edu.eci.arsw.spamkeywordsdatasource.HostBlacklistsDataSourceFacade;
@@ -303,7 +298,7 @@ import java.util.logging.Logger;
  * @author hcadavid
  */
 public class HostBlackListsValidator {
-	int A;
+    int A;
     int B;
     private static final int BLACK_LIST_ALARM_COUNT=1;
     
@@ -318,7 +313,7 @@ public class HostBlackListsValidator {
      * @return  Blacklists numbers where the given host's IP address was found.
      */
     public HostBlackListsValidator(int A,int B) {
-		this.A=A;
+	this.A=A;
         this.B=B;
 	}
     
@@ -341,7 +336,6 @@ public class HostBlackListsValidator {
                 blackListOcurrences.add(i);
                 ocurrencesCount++;
             }
-           
         }
         
         if (ocurrencesCount>=BLACK_LIST_ALARM_COUNT){
@@ -350,23 +344,24 @@ public class HostBlackListsValidator {
         else{
             skds.reportAsTrustworthy(ipaddress);
         }                
-        
+    
         LOG.log(Level.INFO, "Checked Black Lists:{0} of {1} and number ocurrences {2}", new Object[]{A, B,ocurrencesCount});
         
         return ocurrencesCount;
     }
-    
-    
     private static final Logger LOG = Logger.getLogger(HostBlackListsValidator.class.getName());
-    
-    
-    
 }
 
 
 ```
 
-#COLOCAR IMAGEN CORRIENDO CON CycleLifeThread y corriendo y correr con la otra ip que no muestra ocurrencias
+>Ejecución Con la ip "200.24.34.55":
+
+![Screenshot](images/ipv.PNG)
+
+>Ejecución Con la ip "212.24.24.55":
+
+![Screenshot](images/ipn.PNG)
 
 
 ### Part III - Discussion
