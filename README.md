@@ -450,23 +450,47 @@ public class Control extends Thread {
 	@Override
 	public void run() {
 		Scanner sc = new Scanner(System.in);
-		synchronized (sc) {
-			System.out.println("Oprime un boton");
-			sc.nextLine();
-			
-			for (int i = 0; i < NTHREADS; i++) {
-				
-				pft[i].start();
-				
-			}
+		for (int i = 0; i < NTHREADS; i++) {
+			pft[i].numberThread=i+1;
+			pft[i].start();
 
 		}
 		
+		for(long finaliza = System.currentTimeMillis() + TMILISECONDS;System.currentTimeMillis() <= finaliza;) {
+			if (System.currentTimeMillis() >= finaliza && !terminate()) {
+				for (int i = 0; i < pft.length; i++) {
+					pft[i].detener();
+
+				}
+				System.out.println("Touch key");
+				sc.nextLine();
+				for (int i = 0; i < pft.length; i++) {
+					System.out.println("The thread that is running is "+ pft[i].numberThread+" number of primes is: "+pft[i].getPrimes().size());
+					pft[i].activar();
+				}
+
+				synchronized (this) {
+					this.notifyAll();
+				}
+				finaliza = System.currentTimeMillis() + TMILISECONDS;
+			} else if (System.currentTimeMillis() >= finaliza && terminate()) {
+				for (int i = 0; i < pft.length; i++)
+					System.out.println("The thread " + pft[i].numberThread + " have be found " + pft[i].getPrimes().size());
+				System.out.println("Finish");
+				System.exit(0);
+			}
+		}
 
 	}
+	private boolean terminate() {
+    	boolean acabar = true;
+    	for (int i = 0; i < pft.length && acabar; i++) {
+			if(pft[i].isAlive()) acabar = false;
+		}
+    	return acabar;
+    }
 
 }
-
 ```
 
 #### Codigo del Main
@@ -482,7 +506,6 @@ public class Main {
 		Control control = Control.newControl();
 		Scanner sc = new Scanner(System.in);
 		control.start();
-		sc.nextLine();
 
 	}
 
@@ -502,6 +525,8 @@ public class PrimeFinderThread extends Thread {
 	int a, b;
 
 	private List<Integer> primes;
+	public boolean espere = false;
+	public int numberThread;
 
 	public PrimeFinderThread(int a, int b) {
 		super();
@@ -513,23 +538,26 @@ public class PrimeFinderThread extends Thread {
 	@Override
 	public void run() {
 		Scanner sc = new Scanner(System.in);
-		synchronized (sc) {
-			for (int i = a; i < b; i++) {
 
-				if (isPrime(i)) {
-					primes.add(i);
-					//System.out.println(i);
-				}
-				try {
-					sc.wait(1);
-					System.out.println("Numero de Primos Encontrados por el "+ Thread.currentThread().toString()+primes.size());
-					sc.notifyAll();
-					sc.nextLine();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		for (int i = a; i < b; i++) {
+			if (espere) {
+				synchronized (this) {
+
+					try {
+						
+						this.wait();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
 				}
 			}
+			if (isPrime(i)) {
+				primes.add(i);
+				// System.out.println(i);
+			}
+
 		}
 	}
 
@@ -545,14 +573,25 @@ public class PrimeFinderThread extends Thread {
 		}
 		return ans;
 	}
-
+	
+	
 	public List<Integer> getPrimes() {
 		return primes;
 	}
 
+	public void detener() {
+
+		espere = true;
+
+	}
+
+	public synchronized void activar() {
+
+		espere = false;
+		this.notifyAll();
+
+	}
 }
-
-
 ```
 
 #Colocar que faltan responder las Preguntas
@@ -566,9 +605,9 @@ public class PrimeFinderThread extends Thread {
 
 ## Autores
 
-* **Andres Giovanne Florez Perez**  ARSW-LAB1 - [andresflorezp] (https://github.com/andresflorezp)
+* **Andres Giovanne Florez Perez**  ARSW-LAB3 - [andresflorezp] (https://github.com/andresflorezp)
 
-* **Juan Nicolas Nontoa Caballero**  ARSW-LAB1 - [nontoa] (https://github.com/nontoa)
+* **Juan Nicolas Nontoa Caballero**  ARSW-LAB3 - [nontoa] (https://github.com/nontoa)
 
 Consulte también la lista de [colaboradores] (https://github.com/nontoa/ARSW-LAB3/graphs/contributors) que participaron en este proyecto.
 
