@@ -368,6 +368,8 @@ public class HostBlackListsValidator {
 
 Se podría mejorar haciendo tantos subprocesos como nucleos de procesamiento haya en el computador que se este trabajando, para esto podemos usar la API runTime. Así se aprovechara al máximo la capacidad de procesamiento y por lo tanto la estrategia sería eficiente.
 
+> Clase RunTime: Cada aplicación Java tiene una única instancia de la clase Runtime que permite a la aplicación interactuar con el entorno en el que se ejecuta la aplicación. El tiempo de ejecución actual se puede obtener del método getRuntime. Una aplicación no puede crear su propia instancia de esta clase.
+
 
 ### Part IV - Performance Evaluation
 
@@ -400,7 +402,6 @@ Gráficas de visualVM con un numero determinado de hilos.
 
 >Vemos que para calculos no tan grandes el número exagerado de hilos no puede ser la solución para optimizar el rendimiento. Como observamos anteriormente en las graficas, algunas veces es mejor que la cantidad de subprocesos no sea tan grande, puesto que esto puede generar perdida de tiempo ya que hay muchos procesos corriendo para un objetivo pequeño que se puede solucionar con menos hilos.
 
-#HACER LOS CALCULOS QUE TE PIDEN
 
 ## Parte Snake Race
 
@@ -593,13 +594,6 @@ public class PrimeFinderThread extends Thread {
 	}
 }
 ```
-
-#Colocar que faltan responder las Preguntas
-
-
-
-
-
 
 
 
