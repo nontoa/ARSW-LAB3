@@ -346,7 +346,34 @@ public class HostBlackListsValidator {
 
 ### Part IV - Performance Evaluation
 
-#Calculo de los procesadores
+Gráficas de visualVM con un numero determinado de hilos.
+
+Para un solo hilo se comporta de la siguiente manera:
+
+![Screenshot](images/T1g.png)
+
+Y el comportamiento del hilo:
+
+![Screenshot](images/T1t.png)
+
+Para 50 hilos se comporta de la siguiente manera:
+
+![Screenshot](images/T50g.png)
+
+Y el comportamiento de los 50 hilos:
+
+![Screenshot](images/T50t.png)
+
+Para 100 hilos se comporta de la siguiente manera:
+
+![Screenshot](images/T100g.png)
+
+Y el comportamiento de los 100 hilos:
+
+![Screenshot](images/T100t.png)
+
+>Vemos que para calculos no tan grandes el número exagerado de hilos no puede ser la solución para optimizar el rendimiento.
+
 #HACER LOS CALCULOS QUE TE PIDEN
 
 ## Parte Snake Race
