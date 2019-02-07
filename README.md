@@ -348,27 +348,27 @@ public class HostBlackListsValidator {
 
 Gráficas de visualVM con un numero determinado de hilos.
 
-Para un solo hilo se comporta de la siguiente manera:
+* Para un solo hilo se comporta de la siguiente manera:
 
 ![Screenshot](images/T1g.png)
 
-Y el comportamiento del hilo:
+* Y el comportamiento del hilo:
 
 ![Screenshot](images/T1t.png)
 
-Para 50 hilos se comporta de la siguiente manera:
+* Para 50 hilos se comporta de la siguiente manera:
 
 ![Screenshot](images/T50g.png)
 
-Y el comportamiento de los 50 hilos:
+* Y el comportamiento de los 50 hilos:
 
 ![Screenshot](images/T50t.png)
 
-Para 100 hilos se comporta de la siguiente manera:
+* Para 100 hilos se comporta de la siguiente manera:
 
 ![Screenshot](images/T100g.png)
 
-Y el comportamiento de los 100 hilos:
+* Y el comportamiento de los 100 hilos:
 
 ![Screenshot](images/T100t.png)
 
